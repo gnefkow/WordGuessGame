@@ -1,16 +1,14 @@
 
-$( document ).ready(function() {});
-
-    
-
+$( document ).ready(function() {
 
 var wordName = ["AMX", "JAVELIN", "CHARGER", "GREMLIN", "WRX"];
-
 var wordDisplay = "";
 var gameState = "start";
 var wordSplit = "x";
 var guessedLetters = [""];
 var guessesLeft = 10;
+var boxLetter
+var guessedLetterBox
 
 //DOM Elements
 var startTextEl
@@ -20,8 +18,10 @@ var wordDisplayEl
 
 document.addEventListener("keyup", function(){
 
+
 //TURN THE GAME ON:
 if (gameState === "start") {
+//=======================================  START SCREEN!!  ===========================================//
 
     // Would love to get these DOM Elelments up to the top, but it breaks when I try
     //Set the DOM Text
@@ -47,7 +47,8 @@ if (gameState === "start") {
 
     //Add the blank boxes
     for (var i = 0; i < wordSplit.length; i++) {
-        var boxLetter = $("<div class='boxLetter'>");
+        boxLetter = $("<div class='boxLetter'>");
+        boxLetter.attr("id", "box-" + i);
         boxLetter.attr("letter-is", wordSplit[i]); //gives the box a data attribute of the appropriate letter
         $("#wordDisplay").append(boxLetter);
     };
@@ -65,20 +66,33 @@ if (gameState === "start") {
 
 
     function letterGuess() {
-        // document.addEventListener("keyup", function(event){
             
         //ADD LETTER TO THE GUESSED LETTERS ARRAY    
         guessedLetters.push(event.key); 
             console.log("Letters Guessed so far: " + guessedLetters);
+        // Display Letters Guessed
+        guessedLetterBox = $("<div class='test'>");
+        
+        wordDisplayEl.append(guessedLetterBox);
+        // guessedLetterBox.text(guessedLetters);
+        
+        // guessedLetterBox.attr("class", "guessedLetterBox test")
+        
+        // guessedLetterBox.text(guessedLetters);
+
 
         //LOOP: check wordSplit[0] to see if the string === event.key 
         for (var i = 0; i < wordSplit.length; i++) {
-            if (wordSplit.includes(event.key)) {lastGuess = true;}
+            if (wordSplit[i].includes(event.key)) {
+                lastGuess = true;
+                // boxLetter.text(boxLetter["data-attribute"]);
+                // boxLetter.attr("class","test");
+            }
             else {lastGuess = false;}
             };
 
         // Rewards and Punishments!
-        if (lastGuess === true) {console.log("var guess knows its true!")}
+        if (lastGuess === true) {console.log("var guess knows its true!");}
         else {
             guessesLeft -= 1; 
             console.log("Letter in word? " + lastGuess)
@@ -115,3 +129,4 @@ if (gameState === "start") {
 
 console.log(`Game state: ${gameState}`);
 
+}); // Document Ready

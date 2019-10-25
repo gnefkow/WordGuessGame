@@ -12,5 +12,7 @@
 
 .test {
     color: blue;
-    background-color: orange;
+    background-color: green;
+    height: 2em;
+    width: 1em;
 }
