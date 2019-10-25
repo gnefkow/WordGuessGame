@@ -2,3 +2,15 @@
     display: none;
 }
 
+.boxLetter {
+    background-color: orange;
+    height: 2em;
+    width: 1em;
+    border: solid white 1px;
+    float: left;
+}
+
+.test {
+    color: blue;
+    background-color: orange;
+}
