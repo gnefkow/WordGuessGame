@@ -61,14 +61,13 @@ if (gameState === "start") {
 
 } else if (gameState == "play") {   
 //=======================================  TIME TO PLAY!! ===========================================//
-    
+  
     
     // Turns the key into a string that is uppercase
     var guess = event.key;
       guess.toString();
       guess = guess.toUpperCase();
-      console.log(`User guessed: ${guess}`);
-    
+      console.log(`+++++++ GUESS ${guess} +++++++++`);
     
     function letterGuess() {
       
@@ -98,10 +97,10 @@ if (gameState === "start") {
             };
 
         // Rewards and Punishments!
-        if (lastGuess === true) {console.log("var guess knows its true!");}
+        if (lastGuess === true) {console.log(`${guess} is in the word!`);}
         else {
             guessesLeft -= 1; 
-            console.log("Letter in word? " + lastGuess)
+            console.log(`${guess} is NOT in the word!`)
             console.log(`The user has ${guessesLeft} guess(es) left.`)
             };
 
