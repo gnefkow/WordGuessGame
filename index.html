@@ -6,6 +6,7 @@
 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="assets/css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="assets/javascript/game.js"></script> 
@@ -16,11 +17,27 @@
 </head>
 
 <body>
-<h1 id="startText">Press any key to start</h1>
-<div id="guessWord">
-    <p>Guess letters to spell the car</p>
-    <span id="wordDisplay"></span>
+<div class="container wipMessage">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Open the console to see the magic ;)</h3>
+    </div>  
+  </div>
 </div>
+
+<div class="container game">
+    <div class="row">
+      <div class="col-md-12">
+        <h1 id="startText">Press any key to start the car guess game!</h1>
+        <p>(Turn on Caps Lock to play)</p>
+
+        <div id="guessWord">
+          <p>Guess letters to spell the name of the car!</p>
+          <span id="wordDisplay"></span>
+        </div>
+    </div>  
+  </div>
+</div>    
 
 
 

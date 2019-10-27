@@ -19,18 +19,15 @@ var wordDisplayEl
 document.addEventListener("keyup", function(){
 
 
-//TURN THE GAME ON:
+
 if (gameState === "start") {
 //=======================================  START SCREEN!!  ===========================================//
 
-    // Would love to get these DOM Elelments up to the top, but it breaks when I try
     //Set the DOM Text
     startTextEl = document.getElementById("startText");
     guessWordEl = document.getElementById("guessWord");
     wordDisplayEl = document.getElementById("wordDisplay");
-    
     var word1 = randomWord();
-    
     wordSplit = word1.split("");
 
 
@@ -43,7 +40,7 @@ if (gameState === "start") {
     // Display the letters on the screen
     startTextEl.style.display = "none";
     guessWordEl.style.display = "block";
-    wordDisplayEl.innerHTML = wordSplit;
+    // wordDisplayEl.innerHTML = wordSplit;
 
     //Add the blank boxes
     for (var i = 0; i < wordSplit.length; i++) {
@@ -54,7 +51,8 @@ if (gameState === "start") {
     };
 
     console.log(`Game state: ${gameState}`);
-    console.log(`The word is ${word1} and it has ${word1.length} letters. var wordSplit is ${wordSplit}`);
+    console.log(`The word is "${word1}" and it has ${word1.length} letters: ${wordSplit}`);
+    console.log(`The user has ${guessesLeft} guess(es) left.`)
     gameState = "play";
 
     
@@ -64,31 +62,33 @@ if (gameState === "start") {
 //=======================================  TIME TO PLAY!!  ===========================================//
     var guess = true;
 
-
     function letterGuess() {
             
         //ADD LETTER TO THE GUESSED LETTERS ARRAY    
         guessedLetters.push(event.key); 
             console.log("Letters Guessed so far: " + guessedLetters);
-        // Display Letters Guessed
-        guessedLetterBox = $("<div class='test'>");
         
-        wordDisplayEl.append(guessedLetterBox);
-        // guessedLetterBox.text(guessedLetters);
+
+        // ++++ THIS AREA IS UNDER CONSTRUCTION ++++++//
+            // Display Letters Guessed
+            // guessedLetterBox = $("<div class='test'>");
         
-        // guessedLetterBox.attr("class", "guessedLetterBox test")
-        
-        // guessedLetterBox.text(guessedLetters);
+             // wordDisplayEl.append(guessedLetterBox);
+             // guessedLetterBox.text(guessedLetters);
+             // guessedLetterBox.attr("class", "guessedLetterBox test")
+             // guessedLetterBox.text(guessedLetters);
 
 
         //LOOP: check wordSplit[0] to see if the string === event.key 
         for (var i = 0; i < wordSplit.length; i++) {
-            if (wordSplit[i].includes(event.key)) {
+          console.log(wordSplit[i]);
+            if (wordSplit.includes(event.key)) {
                 lastGuess = true;
+                console.log(`wordsplit is ${wordSplit}`);
                 // boxLetter.text(boxLetter["data-attribute"]);
                 // boxLetter.attr("class","test");
             }
-            else {lastGuess = false;}
+            else {lastGuess = false; console.log(`wordsplit is ${wordSplit}`);}
             };
 
         // Rewards and Punishments!
@@ -96,7 +96,7 @@ if (gameState === "start") {
         else {
             guessesLeft -= 1; 
             console.log("Letter in word? " + lastGuess)
-            console.log(guessesLeft);
+            console.log(`The user has ${guessesLeft} guess(es) left.`)
             };
 
         //End game if player continues to suck (Uses up all of her lives)
