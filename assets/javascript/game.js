@@ -17,6 +17,7 @@ var wordDisplayEl
 
 
 document.addEventListener("keyup", function(){
+  // 
 
 
 
@@ -59,13 +60,20 @@ if (gameState === "start") {
 
 
 } else if (gameState == "play") {   
-//=======================================  TIME TO PLAY!!  ===========================================//
-    var guess = true;
-
+//=======================================  TIME TO PLAY!! ===========================================//
+    
+    
+    // Turns the key into a string that is uppercase
+    var guess = event.key;
+      guess.toString();
+      guess = guess.toUpperCase();
+      console.log(`User guessed: ${guess}`);
+    
+    
     function letterGuess() {
-            
+      
         //ADD LETTER TO THE GUESSED LETTERS ARRAY    
-        guessedLetters.push(event.key); 
+        guessedLetters.push(guess); 
             console.log("Letters Guessed so far: " + guessedLetters);
         
 
@@ -81,14 +89,12 @@ if (gameState === "start") {
 
         //LOOP: check wordSplit[0] to see if the string === event.key 
         for (var i = 0; i < wordSplit.length; i++) {
-          console.log(wordSplit[i]);
-            if (wordSplit.includes(event.key)) {
+            if (wordSplit.includes(guess)) {
                 lastGuess = true;
-                console.log(`wordsplit is ${wordSplit}`);
                 // boxLetter.text(boxLetter["data-attribute"]);
                 // boxLetter.attr("class","test");
             }
-            else {lastGuess = false; console.log(`wordsplit is ${wordSplit}`);}
+            else {lastGuess = false;}
             };
 
         // Rewards and Punishments!
