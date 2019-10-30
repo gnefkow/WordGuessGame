@@ -1,35 +1,32 @@
 
-$( document ).ready(function() {
 
-var wordName = ["AMX", "JAVELIN", "CHARGER", "GREMLIN", "WRX"];
-var wordDisplay = "";
-var gameState = "start";
-var wordSplit = "x";
-var guessedLetters = [""];
-var guessesLeft = 10;
-var boxLetter
-var guessedLetterBox
+  var wordName = ["AMX", "JAVELIN", "CHARGER", "GREMLIN", "WRX", "CIVIC"];
+  var wordDisplay = "";
+  var gameState = "start";
+  var wordSplit = "x";
+  var letterObj = {};
+  var guessedLetters = [""];
+  var guessesLeft = 10;
+  var boxLetter
+  var guessedLetterBox
+  
+  //DOM Elements
+  var startTextEl
+  var guessWordEl
+  var wordDisplayEl
 
-//DOM Elements
-var startTextEl
-var guessWordEl
-var wordDisplayEl
-
-
-document.addEventListener("keyup", function(){
-  // 
-
-
-
-if (gameState === "start") {
-//=======================================  START SCREEN!!  ===========================================//
-
+  //=======================================  START  ===========================================//
+  function startGame(){
+    console.log("the game is starting");
     //Set the DOM Text
     startTextEl = document.getElementById("startText");
     guessWordEl = document.getElementById("guessWord");
     wordDisplayEl = document.getElementById("wordDisplay");
     var word1 = randomWord();
     wordSplit = word1.split("");
+    for (var i=0; i < wordSplit.length; i++) {
+      letterObj[wordSplit[i]] = false
+    };
 
 
     //CHOOSE A WORD
@@ -38,10 +35,11 @@ if (gameState === "start") {
         return wordName[randomWordIndex];
     };
 
+
     // Display the letters on the screen
     startTextEl.style.display = "none";
     guessWordEl.style.display = "block";
-    // wordDisplayEl.innerHTML = wordSplit;
+    
 
     //Add the blank boxes
     for (var i = 0; i < wordSplit.length; i++) {
@@ -51,18 +49,39 @@ if (gameState === "start") {
         $("#wordDisplay").append(boxLetter);
     };
 
+
     console.log(`Game state: ${gameState}`);
     console.log(`The word is "${word1}" and it has ${word1.length} letters: ${wordSplit}`);
     console.log(`The user has ${guessesLeft} guess(es) left.`)
     gameState = "play";
+  };
 
-    
 
 
-} else if (gameState == "play") {   
-//=======================================  TIME TO PLAY!! ===========================================//
+
+//=======================================  GAME OVER!!!!  ===========================================//
+function gameOver(){
+    // Display the letters on the screen
+    startTextEl.style.display = "block";
+    startTextEl.innerHTML = "GAME OVER!";
+    guessWordEl.style.display = "none";
+    wordDisplayEl.style.display = "none";
+}
+
+//=======================================  WIN!!!!  ===========================================//
+function win(){
+  // Display the letters on the screen
+  startTextEl.style.display = "block";
+  startTextEl.innerHTML = "WIN!";
+  $(".boxLetter").css("background-color", "green");
+  $(".boxLetter").css("color", "white");
+}
+
+
+//=======================================  PLAY  ===========================================//
+document.addEventListener("keyup", function(){
+    var rightLetter
   
-    
     // Turns the key into a string that is uppercase
     var guess = event.key;
       guess.toString();
@@ -76,25 +95,29 @@ if (gameState === "start") {
             console.log("Letters Guessed so far: " + guessedLetters);
         
 
-        // ++++ THIS AREA IS UNDER CONSTRUCTION ++++++//
-            // Display Letters Guessed
-            // guessedLetterBox = $("<div class='test'>");
         
-             // wordDisplayEl.append(guessedLetterBox);
-             // guessedLetterBox.text(guessedLetters);
-             // guessedLetterBox.attr("class", "guessedLetterBox test")
-             // guessedLetterBox.text(guessedLetters);
+          // Display Letters Guessed
+            function putLetter() {
+            $(`[letter-is=${guess}]`).text(rightLetter);
+            };
+          
 
-
-        //LOOP: check wordSplit[0] to see if the string === event.key 
-        for (var i = 0; i < wordSplit.length; i++) {
-            if (wordSplit.includes(guess)) {
-                lastGuess = true;
-                // boxLetter.text(boxLetter["data-attribute"]);
-                // boxLetter.attr("class","test");
+        //Run guess through letterObj's keys to see if the lastGuess is true
+            if (Object.keys(letterObj).includes(guess)) {
+              letterObj[guess] = true
+              lastGuess = true;
+              rightLetter = guess;
+              putLetter();
             }
             else {lastGuess = false;}
-            };
+
+        //Check for repeat letter
+            //...coming soon
+          
+        //Player can win:
+            if(Object.values(letterObj).includes(false)){}
+            else {console.log(`WIN`); win();}
+
 
         // Rewards and Punishments!
         if (lastGuess === true) {console.log(`${guess} is in the word!`);}
@@ -107,32 +130,15 @@ if (gameState === "start") {
         //End game if player continues to suck (Uses up all of her lives)
         if (guessesLeft > 1) {game = "play";}
         else if (guessesLeft == 1) {game = "play"; console.log("Last Guess!!")}
-        else {gameState = "lose"; console.log("GAME OVER!!!")};
-        
-
+        else {
+          console.log("GAME OVER!!!");
+          gameOver();
+        };
     }; //
-
     letterGuess()
-
-} else if (gameState == "lose") { 
-//=======================================  GAME OVER!!!!  ===========================================//
-
-
-    // Display the letters on the screen
-    startTextEl.style.display = "block";
-    startTextEl.innerHTML = "GAME OVER!";
-    guessWordEl.style.display = "none";
-    wordDisplayEl.style.display = "none";
-};
-
-}); //this ends the on key up Function
+});
+//=======================================  /PLAY  ===========================================//
 
 
 
-
-//Run Functions
-
-
-console.log(`Game state: ${gameState}`);
-
-}); // Document Ready
+startGame();
