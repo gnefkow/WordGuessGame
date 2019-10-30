@@ -98,21 +98,17 @@ document.addEventListener("keyup", function(){
             };
           
 
-        //LOOP: check wordSplit[0] to see if the string === event.key 
-
-            if (wordSplit.includes(guess)) {
+        //Run guess through letterObj's keys to see if the lastGuess is true
+            if (Object.keys(letterObj).includes(guess)) {
+              letterObj[guess] = true
               lastGuess = true;
               rightLetter = guess;
               putLetter();
             }
             else {lastGuess = false;}
-
-            if (Object.keys(letterObj).includes(guess)) {
-              letterObj[guess] = true
-            }
-            
-            Object.values(letterObj).includes(false)
-            
+          
+        //Set     
+        // Object.values(letterObj).includes(false)
 
 
 
