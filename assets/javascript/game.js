@@ -105,7 +105,8 @@ if (gameState === "start") {
             };
 
         //End game if player continues to suck (Uses up all of her lives)
-        if (guessesLeft > -1) {game = "play";}
+        if (guessesLeft > 1) {game = "play";}
+        else if (guessesLeft == 1) {game = "play"; console.log("Last Guess!!")}
         else {gameState = "lose"; console.log("GAME OVER!!!")};
         
 
