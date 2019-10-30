@@ -3,7 +3,7 @@
 
 <h1>Guess the type of car</h1>
 <p>This is a game that randomly generates a word that the user has to guess by guessing hte letters. If the user makes too many wrong guesses, they lose.</p>
-<p> Its WIP, but <a href="https://gnefkow.github.io/WordGuessGame/">you can try it out here.</a>
+<p> Its WIP, but <a href="https://gnefkow.github.io/WordGuessGame/" target="blank">you can try it out here.</a>
 
 <h1> Status: <span style="color: red;">Work in Progress</span></h1>
 <br>
